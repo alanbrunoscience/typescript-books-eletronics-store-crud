@@ -1,0 +1,28 @@
+{
+  "name": "typescript-books-eletronics-store-crud",
+  "version": "1.0.0",
+  "description": "This repository contains the \"Books and Electronics Store\" project developed with TypeScript programming.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alanbrunoscience/typescript-booksEletronicsStore-crud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alanbrunoscience/typescript-booksEletronicsStore-crud/issues"
+  },
+  "homepage": "https://github.com/alanbrunoscience/typescript-booksEletronicsStore-crud#readme",
+  "dependencies": {
+    "@types/node": "^22.10.2",
+    "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.8"
+  }
+}
