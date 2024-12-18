@@ -1,7 +1,7 @@
 import readlineSync = require("readline-sync");
 import { colors } from './src/util/Colors';
 import { Book } from "./src/model/Book";
-import { Eletronic } from "./src/model/Eletronic";
+import { Electronic } from "./src/model/Electronic";
 import { ProductController } from "./src/controller/ProductController";
 
 export function main() {
@@ -12,15 +12,15 @@ export function main() {
     // Auxiliary Variables
     let option, productType, quantity, price, productId, discountOption, discountPerc: number;
     let prodName, authorName, bookGenre, productBrand, productModel: string;
-    const productTypes = ['Book', 'Eletronic'];
+    const productTypes = ['Book', 'Electronic'];
 
     // New Instances of the "Book" Class (Objects)
-    product.registerProduct(new Book(product.generateId(), "Lord of The Rings", "Book", 10, 200.00, "J.R.R. Tolkien", "Fantasy", 150.99));
-    product.registerProduct(new Book(product.generateId(), "The Chronicles of Narnia", "Book", 15, 149.78, "C. S. Lewis", "Fantasy"));
+    product.registerProduct(new Book(product.generateId(), "Lord of The Rings", 1, 10, 200.00, "J.R.R. Tolkien", "Fantasy", 150.99));
+    product.registerProduct(new Book(product.generateId(), "The Chronicles of Narnia", 1, 15, 149.78, "C. S. Lewis", "Fantasy"));
 
-    // New Instances of the "Eletronic" Class (Objects)
-    product.registerProduct(new Eletronic(product.generateId(), "Laptop", "Eletronic", 5, 7000.00, "Dell", "G15", 6800.00));
-    product.registerProduct(new Eletronic(product.generateId(), "Laptop", "Eletronic", 5, 15000.00, "Dell", "Alienware"));
+    // New Instances of the "Electronic" Class (Objects)
+    product.registerProduct(new Electronic(product.generateId(), "Laptop", 2, 5, 7000.00, "Dell", "G15", 6800.00));
+    product.registerProduct(new Electronic(product.generateId(), "Laptop", 2, 10, 15000.00, "Dell", "Alienware"));
 
     do {
 
@@ -92,11 +92,11 @@ export function main() {
                             }
 
                             console.log();
-                            product.registerProduct(new Eletronic(product.generateId(), formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel, (price - ((discountPerc / 100) * price))));
+                            product.registerProduct(new Electronic(product.generateId(), formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel, (price - ((discountPerc / 100) * price))));
 
                         } else {
                             console.log();
-                            product.registerProduct(new Eletronic(product.generateId(), formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel));
+                            product.registerProduct(new Electronic(product.generateId(), formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel));
                         }
 
                         break;
@@ -212,11 +212,11 @@ export function main() {
                                     }
         
                                     console.log();
-                                    product.updateProduct(new Eletronic(productId, formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel, (price - ((discountPerc / 100) * price))));
+                                    product.updateProduct(new Electronic(productId, formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel, (price - ((discountPerc / 100) * price))));
         
                                 } else {
                                     console.log();
-                                    product.updateProduct(new Eletronic(productId, formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel));
+                                    product.updateProduct(new Electronic(productId, formattedProdName, productType, quantity, price, formattedProdBrand, formattedProdModel));
                                 }
         
                                 break;
