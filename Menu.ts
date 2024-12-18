@@ -35,9 +35,6 @@ export function main() {
                 prodName = readlineSync.question("\n- Enter the product name: ");
                 let formattedProdName = product.toTitleCase(prodName);
 
-                console.log("\n- Select the product type:");
-                productType = readlineSync.keyInSelect(productTypes, "> ", {cancel: false}) + 1;
-
                 quantity = readlineSync.questionInt("\n- Enter the total quantity of products: ", {limitMessage: "\n-> Invalid data type entered!"});
                 while(quantity < 1) {
                     quantity = readlineSync.questionInt("\n-> Invalid data! Enter a quantity greater than 0: ");
@@ -48,21 +45,24 @@ export function main() {
                     price = readlineSync.questionFloat("\n-> Invalid data! Enter a price greater than R$ 0.00: R$ ");
                 }
 
+                console.log("\n- Select the product type:");
+                productType = readlineSync.keyInSelect(productTypes, "> ", {cancel: false}) + 1;
+
                 switch(productType) {
                     
                     case 1:
 
+                        bookGenre = getGenresBooks();
+
                         authorName = readlineSync.question("\n- Enter the author's name: ");
                         let formattedAuthorName = product.toTitleCase(authorName);
-
-                        bookGenre = getGenresBooks();
 
                         discountOption = readlineSync.keyInYNStrict("\n- Is there a discount on this product? ");
 
                         if(discountOption) {
                             discountPerc = readlineSync.questionFloat("\n-> Enter the discount percentage (%): ");
-                            while(discountPerc < 0.00 || discountPerc < 100.00) {
-                                price = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
+                            while(discountPerc < 0.00 || discountPerc > 100.00) {
+                                discountPerc = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
                             }
 
                             console.log();
@@ -87,8 +87,8 @@ export function main() {
 
                         if(discountOption) {
                             discountPerc = readlineSync.questionFloat("\n-> Enter the discount percentage (%): ");
-                            while(discountPerc < 0.00 || discountPerc < 100.00) {
-                                price = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
+                            while(discountPerc < 0.00 || discountPerc > 100.00) {
+                                discountPerc = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
                             }
 
                             console.log();
@@ -156,8 +156,6 @@ export function main() {
                         prodName = readlineSync.question("\n- Enter the new product name: ");
                         let formattedProdName = product.toTitleCase(prodName);
 
-                        productType = searchedProduct.getProdType();
-
                         quantity = readlineSync.questionInt("\n- Enter the new total quantity of products: ", {limitMessage: "\n-> Invalid data type entered!"});
                         while(quantity < 1) {
                             quantity = readlineSync.questionInt("\n-> Invalid data! Enter a quantity greater than 0: ");
@@ -168,21 +166,23 @@ export function main() {
                             price = readlineSync.questionFloat("\n-> Invalid data! Enter a price greater than R$ 0.00: R$ ");
                         }
 
+                        productType = searchedProduct.getProdType();
+
                         switch(productType) {
                             
                             case 1:
 
+                                bookGenre = getGenresBooks();
+
                                 authorName = readlineSync.question("\n- Enter the new author's name: ");
                                 let formattedAuthorName = product.toTitleCase(authorName);
-        
-                                bookGenre = getGenresBooks();
         
                                 discountOption = readlineSync.keyInYNStrict("\n- Is there a discount on this product? ");
         
                                 if(discountOption) {
                                     discountPerc = readlineSync.questionFloat("\n-> Enter the new discount percentage (%): ");
-                                    while(discountPerc < 0.00 || discountPerc < 100.00) {
-                                        price = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
+                                    while(discountPerc < 0.00 || discountPerc > 100.00) {
+                                        discountPerc = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
                                     }
         
                                     console.log();
@@ -207,8 +207,8 @@ export function main() {
         
                                 if(discountOption) {
                                     discountPerc = readlineSync.questionFloat("\n-> Enter the new discount percentage (%): ");
-                                    while(discountPerc < 0.00 || discountPerc < 100.00) {
-                                        price = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
+                                    while(discountPerc < 0.00 || discountPerc > 100.00) {
+                                        discountPerc = readlineSync.questionFloat("\n-> Invalid percentage! Enter a value between 0.00 and 100.00: ");
                                     }
         
                                     console.log();
@@ -387,20 +387,10 @@ export function getGenresBooks(): string {
     const genres = [fictionGenres, nonfictionGenres, otherGenres];
 
     console.log("\n- Select the book category:");
-    const bookCategory = readlineSync.keyInSelect(booksCategories, "> ", { cancel: true });
-
-    if (bookCategory === -1) {
-        console.log("No category selected. Exiting...");
-        return ""; // Or handle as appropriate.
-    }
+    const bookCategory = readlineSync.keyInSelect(booksCategories, "> ", {cancel: false});
 
     console.log(`\n-> Select a genre from ${booksCategories[bookCategory]}:`);
-    const selectedGenre = readlineSync.keyInSelect(genres[bookCategory], "> ", { cancel: true });
-
-    if (selectedGenre === -1) {
-        console.log("No genre selected. Exiting...");
-        return ""; // Or handle as appropriate.
-    }
+    const selectedGenre = readlineSync.keyInSelect(genres[bookCategory], "> ", {cancel: false});
 
     return genres[bookCategory][selectedGenre];
 

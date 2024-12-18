@@ -28,7 +28,7 @@ export class Electronic extends Product {
     }
 
     public getProductModel(): string {
-        return this._productBrand;
+        return this._productModel;
     }
 
     public setProductModel(productModel: string): void {
